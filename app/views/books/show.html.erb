@@ -10,17 +10,18 @@
   		<h2>Book detail</h2>
   		<table class='table'>
   		  <tr>
-          <td><%= link_to (@booku.user) do %>
-              <%= image_tag @booku.user.get_profile_image, size:"100x100" %><br>
-              <%= @booku.user.name %>
+          <td><%= link_to (@book.user) do %>
+              <%= image_tag @book.user.get_profile_image, size:"100x100" %><br>
+              <%= @book.user.name %>
             <% end %>
           </td>
-          <td><%= link_to @booku.title, @booku %></td>
-          <td><%= @booku.body %></td>
-            <% if @booku.user_id == current_user.id %>
-              <td><%= link_to 'Edit', edit_book_path(@booku), class: "btn btn-sm btn-success" %></td>
-              <td><%= link_to 'Destroy', @booku, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
+          <td><%= link_to @book.title, @book %></td>
+          <td><%= @book.body %></td>
+            <% if @book.user_id == current_user.id %>
+              <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success" %></td>
+              <td><%= link_to 'Destroy', @book, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
             <% end %>
+          <td><%= render 'favorites/favorites', book: @book %></td>
         </tr>
       </table>
     </div>
