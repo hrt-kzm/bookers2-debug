@@ -11,6 +11,8 @@ class BooksController < ApplicationController
   def index
     @books = Book.all
     @book = Book.new
+    @following_users = current_user.following_user
+    @follow_users = current_user.follow_user
   end
 
   def create

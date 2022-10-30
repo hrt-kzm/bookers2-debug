@@ -31,5 +31,26 @@ class User < ApplicationRecord
   def following?(user) #フォロー済みかの確認を行うメソッドの定義
     following_user.include?(user)
   end
-
+  
+  #　検索条件の分岐
+  def self.search_for(content, method)
+    # 完全一致の場合
+    if method == 'perfect'
+      # 入力内容と'title'が一致するデータを取得する
+      User.where(name: content)
+    # 前方一致の場合
+    elsif method == 'forward'
+      # 入力内容の文字列から始まるデータを取得する
+      User.where('name LIKE ?', "#{content}%")
+    # 後方一致の場合
+    elsif method == 'backward'
+      #入力内容の文字列で終わるデータを取得する
+      User.where('name LIKE ?', "%#{content}")
+    # それ以外(部分一致)の場合
+    else
+      # 入力内容を含むデータを取得する
+      User.where('name LIKE ?', "%#{content}%")
+    end
+  end
+  
 end

@@ -1,0 +1,17 @@
+<div class="container center-block">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="mx-auto search_form" %>
+        <%= form_with url: search_path, method: :get, local: true do |f| %>
+          <!-- フォームに入力されたワードは"content"としてコントローラーのアクションに送られる -->
+          <%= f.text_field :content %>
+          <!-- 検索する対象の設定 -->
+          <%= f.select :model, options_for_select({"User"=>"user", "Book"=>"book"}) %> <!-- "選択肢に表示する文字"=>"DBに渡す値" -->
+          <!-- 検索手法の設定 -->
+          <%= f.select :method, options_for_select({"完全一致"=>"perfect", "前方一致"=>"forward", "後方一致"=>"backward", "部分一致"=>"partial"}) %>
+          <%= f.submit "検索" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

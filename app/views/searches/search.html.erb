@@ -1,0 +1,15 @@
+<!-- 検索対象が'user'だった場合 -->
+<% if @model == 'user' %>
+  <!-- フォームに入力した内容を表示 -->
+  <h3>Users search for "<%= @content %>"</h3>
+  <!-- ユーザー一覧のパーシャルを呼び出し、検索条件に当てはまるデータを表示する -->
+  <%= render 'users/index', users: @records %>
+<!-- 検索対象が'book'だった場合 -->
+<% elsif @model == 'book' %>
+  <!-- フォームに入力した内容を表示 -->
+  <h3>Books search for "<%= @content %>"</h3>
+  <!-- 投稿一覧のパーシャルを呼び出し、検索条件に当てはまるデータを表示する -->
+  <%= render 'books/index', books: @records %>
+<% else %>
+  <h3>Your search was not found</h3>
+<% end %>
