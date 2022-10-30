@@ -23,7 +23,7 @@
               <td><%= link_to 'Destroy', @book, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
             <% end %>
           <td id="favorites_btn_<%= @book.id %>">
-            <%= render partial: 'favorites/favorites', locals: {book: @book} %>
+            <%= render 'favorites/favorites', book: @book %>
           </td>
           <td>コメント数：<%= @book.book_comments.count %></td>
         </tr>
