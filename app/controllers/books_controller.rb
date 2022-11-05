@@ -11,7 +11,9 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book.all
+    #@books = Book.all
+    #いいねの多い順に表示する
+    @books = Book.includes(:favorites).sort {|a,b| b.favorites.size <=> a.favorites.size}
     @book = Book.new
     @following_users = current_user.following_user
     @follow_users = current_user.follow_user

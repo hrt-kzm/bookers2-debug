@@ -5,7 +5,10 @@ class Book < ApplicationRecord
   validates :title,presence:true
   validates :body,presence:true,length:{maximum:200}
   
-  #　検索条件の分岐
+  # 投稿一覧をいいねが多い順に並び替える
+  #scope :favorites_count, -> {order(favorites: :desc)}
+  
+  # 検索条件の分岐
   def self.search_for(content, method)
     # 完全一致の場合
     if method == 'perfect'
@@ -25,7 +28,8 @@ class Book < ApplicationRecord
       Book.where('title LIKE ?', "%#{content}%")
     end
   end
-      
+    
+  
   
   def favorited_by?(user) # favoritesテーブル内に引数で渡されたユーザーidが存在するかを調べる
     favorites.exists?(user_id: user.id)
