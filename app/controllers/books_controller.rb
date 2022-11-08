@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   before_action :ensure_correct_book, only: [:edit, :update]
-
+  impressionist actions: [:index, :show]
   def show
     @book = Book.find(params[:id])
     @user = @book.user
@@ -8,6 +8,8 @@ class BooksController < ApplicationController
     @book_comment = BookComment.new
     @following_users = current_user.following_user
     @follow_users = current_user.follow_user
+    #閲覧数の表示
+    impressionist(@book, nil, :unique => [:ip_address])
   end
 
   def index
