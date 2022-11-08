@@ -14,7 +14,10 @@ class User < ApplicationRecord
   has_many :follow_user, through: :followed, source: :follower #自分をフォローしている人と紐づく、@follow_userと記述することでフォローされている人の一覧を表示することができる
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
   validates :introduction, length: { maximum: 50 }
-
+  # DM機能について
+  has_many :user_rooms
+  has_many :chats
+  has_many :rooms, through: :user_rooms
 
   def get_profile_image
     (profile_image.attached?) ? profile_image : 'no_image.jpg'
@@ -36,7 +39,7 @@ class User < ApplicationRecord
   def self.search_for(content, method)
     # 完全一致の場合
     if method == 'perfect'
-      # 入力内容と'title'が一致するデータを取得する
+      # 入力内容と'name'が一致するデータを取得する
       User.where(name: content)
     # 前方一致の場合
     elsif method == 'forward'
