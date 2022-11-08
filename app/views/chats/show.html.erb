@@ -20,7 +20,7 @@
 </div>
 
 <!-- チャット投稿フォーム -->
-<%= form_with model: @chat, local: false do |f| %>
+<%= form_with model: @chat, data: {remote: true} do |f| %>
   <%= f.text_field :message %>
   <%= f.hidden_field :room_id %>
 <% end %>
